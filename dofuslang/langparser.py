@@ -72,27 +72,24 @@ def convertAllValidLineObjectWithMembrToJson(fileContent: str, objectsName: list
     return jsonOut
 
 def convertAllValidLineVariableWithArrayObjectToJson(fileContent: str, variablesName: list) -> dict:
-    # TODO si fonctionne, reprendre pour envoyer le résultat sous forme d'un seul dict plutot qu'un dict qui contient des dict(jsonContent est intégré à jsonOut) 
     jsonOut = dict()
     for variableName in variablesName:
         extractedElements = list()
+        
         for line in fileContent.splitlines():
             regexLine = fr'^{variableName} = (\[?\{{.*\}}\]?);$'
             validLine = re.search(regexLine, line)
             if validLine != None:
                 jsonContent = dict()
-                jsonContent[variableName] = json.loads(addDoubleQuoteToJsonAttrName(validLine.group(1)))
-                extractedElements.append(jsonContent)
-        jsonOut[variableName] = extractedElements
-    
+                jsonContent = json.loads(addDoubleQuoteToJsonAttrName(validLine.group(1)))
+                extractedElements.extend(jsonContent)       
+        jsonOut[variableName] = extractedElements 
     return jsonOut
    
 def convertAllVariablesLinesToJson(fileContent: str, variablesName: list) -> dict:
-    # TODO si fonctionne, reprendre pour envoyer le résultat sous forme d'un seul dict plutot qu'un dict qui contient des dict(jsonContent est intégré à jsonOut) 
     jsonOut = dict()
 
     for variableName in variablesName:
-        extractedElements = list()
         for line in fileContent.splitlines():
             regexLine = fr'^{variableName} = (.*);$'
             validLine = re.search(regexLine, line)
@@ -108,9 +105,7 @@ def convertAllVariablesLinesToJson(fileContent: str, variablesName: list) -> dic
                         except:
                             # si ce n'est pas un int, on considère qu'il s'agit d'un str
                             jsonContent['value'] = validLine.group(1)
-                    extractedElements.append(jsonContent)
-        jsonOut[variableName] = extractedElements
-    
+                    jsonOut[variableName] = jsonContent   
     return jsonOut
 
 def convertAllVariablesArrayOfArrayLinesToJson(fileContent: str, variablesName: list) -> list:

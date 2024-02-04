@@ -371,7 +371,11 @@ def convertTTGToJson(content: str) -> str:
     return strOutput
 
 
-def addFileInfosToJson(fileType: str, fileLanguage: str, fileVersion: str, jsonContent: str):
+def addFileInfosToJson(fileType: str, fileLanguage: str, fileVersion: str, jsonContent: str) -> str:
+    if jsonContent == '{}':
+        return '{}'
+
+
     output = {fileType:{'version': fileVersion, 'language':fileLanguage}}
     output[fileType].update(json.loads(jsonContent))
     return json.dumps(output, ensure_ascii=False, indent=2)

@@ -1,4 +1,21 @@
-# Les fichiers qui peuvent être extrait:
+# Dofus 1 lang extractor
+
+Il s'agit d'un outil qui permet d'extraire une grande partie des fichiers swf de dofus 1 en json. Certains fichiers sont ignorés (les raisons sont indiquées), le code n'est pas parfait mais il fonctionne.  
+L'outil fonctionne avec les langs de dofus, de la version 1.14 à dofus retro 1.41 et les versions supérieures, les arguments xtra peuvent être utilisés pour extraire les fichiers lang de dofus avant la 1.14.
+
+Cet outil est composé de 2 scripts:
+- langextractor qui permet de transformer les fichiers dans lang/swf/*.swf en json
+- mapextractor qui permet de transformer les fichiers des map dans maps/*.swf en json
+
+Pour afficher l'aide:
+```sh
+python langextractor.py --help
+```
+```sh
+python mapextractor.py --help
+```
+
+## Les fichiers qui peuvent être extrait:
 
 - Alignment
 - Classes

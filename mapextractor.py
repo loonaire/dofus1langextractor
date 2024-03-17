@@ -5,9 +5,9 @@ import os
 import sys
 import argparse
 
-def convertMapFileToJson(filename: str) -> str:
+def convertMapFileToJson(filePath: str, filename: str) -> str:
     if filename.endswith('.swf'):
-        script = extractScriptFromFile(filename)
+        script = extractScriptFromFile(filePath + filename)
         jsonStr = '{'
 
         for line in script.splitlines():
@@ -28,7 +28,7 @@ def convertAllMapsFilesToJson(inputPath: str, outputPath: str, extractToOneFile:
     mapsList = list()
     for filename in os.listdir(inputPath):
         if filename.endswith('.swf'):
-            jsonExtraction = convertMapFileToJson(inputPath + filename)
+            jsonExtraction = convertMapFileToJson(inputPath, filename)
 
             if not extractToOneFile:
                 if cliMode:

@@ -4,6 +4,7 @@ import json
 import os
 import sys
 import argparse
+import operator
 
 def convertMapFileToJson(filePath: str, filename: str) -> str:
     if filename.endswith('.swf'):
@@ -39,9 +40,11 @@ def convertAllMapsFilesToJson(inputPath: str, outputPath: str, extractToOneFile:
             else:
                 mapsList.append(json.loads(jsonExtraction))
     if extractToOneFile:
+        mapsList.sort(key=operator.itemgetter('id'))
         if not displayOutput:
             
             with open(outputPath + 'mapsextract.json','w', encoding='utf-8') as f:
+
                 f.write(json.dumps(mapsList, ensure_ascii=False,indent=2))
         else:
             print(f"{json.dumps(mapsList, ensure_ascii=False, indent=2)}")
@@ -80,5 +83,4 @@ if __name__ == '__main__':
     else:
         convertAllMapsFilesToJson(inputPath, outputPath, False, displayOutput)
 
-        
     pass

@@ -7,6 +7,15 @@ Cet outil est composé de 2 scripts:
 - langextractor qui permet de transformer les fichiers dans lang/swf/*.swf en json
 - mapextractor qui permet de transformer les fichiers des map dans maps/*.swf en json
 
+## Installation
+
+```sh
+git clone https://github.com/loonaire/dofus1langextractor.git
+cd dofus1langextractor
+python langextractor.py # or mapextractor.py
+```
+
+
 Pour afficher l'aide:
 ```sh
 python langextractor.py --help
